@@ -1,0 +1,22 @@
+node_modules/
+dist/
+*.log
+.env
+.idea/
+.vscode/
+coverage/
+
+# npm package files
+src/**/*.test.ts
+src/**/*.spec.ts
+src/scripts/**
+**/__tests__/**
+**/src/**
+*.json
+*.md
+wallaby.js
+*.env
+tsconfig.*
+scripts/**
+.prettierrc
+

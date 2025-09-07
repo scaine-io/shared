@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Env files
+.env
+.env.*
+
+# VS Code settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Coverage directory
+coverage/
+
+# Optional npm cache directory
+.npm
+
+# Output of 'npm pack'
+*.tgz
+*.logs
+*.log
