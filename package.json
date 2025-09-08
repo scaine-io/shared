@@ -1,6 +1,6 @@
 {
 	"name": "@scaine-io/shared",
-	"version": "0.0.7",
+	"version": "1.0.0",
 	"description": "utils for Scaine",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
 		"test-image": "--exec \"ts-node test-image-to-video.ts\"",
 		"test-sync": "ts-node test-lip-sync.ts",
 		"test-download": "nodemon --ext ts --watch . --exec \"ts-node test-download.ts\"",
-		"test-storage": "nodemon --ext ts --watch . --exec \"ts-node test-storage.ts\"",
+		"test-storage": "nodemon --ext ts --watch . --exec \"ts-node test-storage.ts\""
 	},
 	"repository": {
 		"type": "git",
@@ -25,10 +25,11 @@
 	"author": "scaine-io",
 	"license": "MIT",
 	"dependencies": {
-		"@scaine-io/types": "^0.0.12",
+		"@scaine-io/types": "^0.0.13",
 		"cors": "^2.8.5",
 		"express": "^5.1.0",
-		"file-type": "^21.0.0"
+		"file-type": "^21.0.0",
+		"node-fetch": "^3.3.2"
 	},
 	"devDependencies": {
 		"@google-cloud/storage": "^7.17.0",
@@ -36,7 +37,6 @@
 		"@types/express": "^5.0.3",
 		"firebase-admin": "^13.5.0",
 		"firebase-tools": "^14.15.1",
-		"node-fetch": "^3.3.2",
 		"nodemon": "^3.1.10",
 		"ts-node": "^10.9.2",
 		"ts-node-dev": "^2.0.0",
