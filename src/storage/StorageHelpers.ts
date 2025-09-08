@@ -104,3 +104,20 @@ export function getContentTypeByExtension(filename: string): string {
 			return 'application/octet-stream'
 	}
 }
+
+export async function uploadBufferToGCS(fileName: string, buffer: Buffer, storage: Storage): Promise<void> {
+	try {
+		const bucket = storage.bucket(FIREBASE_CONFIG.storageBucket)
+		const file = bucket.file(fileName)
+		const fileType = await fileTypeFromBuffer(buffer)
+
+		await file.save(buffer, {
+			resumable: false, // Prevents a potential "resumable" upload session, which is not needed for a buffer.
+			metadata: {
+				contentType: fileType?.mime || 'application/octet-stream', // Set the content type based on your file
+			},
+		})
+	} catch (error: any) {
+		throw new Error(`Error uploading file to GCS: ${error.message}`)
+	}
+}

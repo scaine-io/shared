@@ -1,6 +1,6 @@
 {
 	"name": "@scaine-io/shared",
-	"version": "0.0.3",
+	"version": "0.0.5",
 	"description": "utils for Scaine",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
