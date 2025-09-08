@@ -51,13 +51,13 @@ export class ComfyClient {
 
 	async setWorkflowPropsImageToVideo(workflow: any, prompt: string, imageInput: string, duration: number): Promise<void> {
 		// Dynamically update properties
-		workflow['3'].inputs.steps = 10
-		workflow['6'].inputs.text = prompt
-		workflow['7'].inputs.text = 'blurry'
-		workflow['30'].inputs.frame_rate = 30
-		workflow['50'].inputs.width = 1024
-		workflow['50'].inputs.height = 512
-		workflow['50'].inputs.length = duration
+		workflow['3'].inputs.steps = 10  	//Number of times the workflow will be processed through the Gpu.  The more is not always better and limits creativity
+		workflow['6'].inputs.text = prompt 
+		workflow['7'].inputs.text = 'blurry'  	//todo: add a negative prompt to the flow.  This gives the user more control over the content created.
+		workflow['30'].inputs.frame_rate = 13  	// A frame rate higher then 12 or 13 will cause the video to process too fast.
+		workflow['50'].inputs.width = 1024 
+		workflow['50'].inputs.height = 512 
+		workflow['50'].inputs.length = duration 	//todo: limit ot 130 frames Max (121 is also a good number at 12 fps instead of 13 allowing 10 sec videos). Total number of frames in the video. 
 		workflow['52'].inputs.image = imageInput
 
 		return workflow
