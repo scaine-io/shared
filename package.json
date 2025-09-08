@@ -23,7 +23,8 @@
 	"dependencies": {
 		"@scaine-io/types": "^0.0.12",
 		"cors": "^2.8.5",
-		"express": "^5.1.0"
+		"express": "^5.1.0",
+		"file-type": "^21.0.0"
 	},
 	"devDependencies": {
 		"@google-cloud/storage": "^7.17.0",
