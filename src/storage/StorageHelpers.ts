@@ -1,5 +1,5 @@
 import type { Storage } from '@google-cloud/storage'
-import { FIREBASE_CONFIG, Media } from '@scaine-io/model'
+import { FIREBASE_CONFIG, Media } from '@scaine-io/types'
 import { fileTypeFromBuffer } from 'file-type'
 import fetch from 'node-fetch'
 /**

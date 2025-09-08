@@ -8,4 +8,5 @@ export * from './comfy/interfaces/SystemStats';
 export * from './comfy/interfaces/UploadResult';
 export * from './comfy/interfaces/WorkflowResult';
 export * from './firestore/FirestoreHelper';
+export * from './helpers/Downloadhelper';
 export * from './storage/StorageHelpers';

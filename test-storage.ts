@@ -1,7 +1,7 @@
 import { downloadFileAsBuffer } from './src/helpers/Downloadhelper'
 import { uploadBufferToGCS, pipelineDownloadToGCS } from './src/storage/StorageHelpers'
 import * as admin from 'firebase-admin'
-import { FIREBASE_CONFIG, Media } from '@scaine-io/model'
+import { FIREBASE_CONFIG, Media } from '@scaine-io/types'
 import { Storage } from '@google-cloud/storage'
 
 // for local testing

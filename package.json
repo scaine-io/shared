@@ -1,6 +1,6 @@
 {
 	"name": "@scaine-io/shared",
-	"version": "0.0.5",
+	"version": "1.0.0",
 	"description": "utils for Scaine",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -12,7 +12,11 @@
 		"deploy": "rm -r ./dist & npm run index && npm run build && bump && npm publish --access public",
 		"update": "ncu -u @scaine-io/* && npm install",
 		"depcheck": "npx depcheck",
-		"unused": "ts-prune"
+		"unused": "ts-prune",
+		"test-image": "--exec \"ts-node test-image-to-video.ts\"",
+		"test-sync": "ts-node test-lip-sync.ts",
+		"test-download": "nodemon --ext ts --watch . --exec \"ts-node test-download.ts\"",
+		"test-storage": "nodemon --ext ts --watch . --exec \"ts-node test-storage.ts\""
 	},
 	"repository": {
 		"type": "git",
@@ -21,9 +25,11 @@
 	"author": "scaine-io",
 	"license": "MIT",
 	"dependencies": {
-		"@scaine-io/model": "^1.0.12",
+		"@scaine-io/types": "^0.0.13",
 		"cors": "^2.8.5",
-		"express": "^5.1.0"
+		"express": "^5.1.0",
+		"file-type": "^21.0.0",
+		"node-fetch": "^3.3.2"
 	},
 	"devDependencies": {
 		"@google-cloud/storage": "^7.17.0",
