@@ -4,7 +4,7 @@ import { ComfyClient } from './src/comfy/ComfyClient'
 
 const image = path.join(__dirname, '/src/comfy/__examples__/example.jpg')
 const destFileName = 'example.jpg'
-const url = 'https://gpunodebb8soxw4stm91.tec-s30.onthetaedgecloud.com/'
+const url = 'https://gpunoded899ugo2qzs1k-b906f2afcea61e53.tec-s20.onthetaedgecloud.com/'
 
 async function testComfyClient() {
 	console.log('Testing ComfyClient...')
@@ -30,7 +30,7 @@ async function testComfyClient() {
 		// console.log('Upload Result:')
 		// console.log(JSON.stringify(uploadResult))
 
-		const workflowPath = path.join(__dirname, '/image-to-video-workflow.json')
+		const workflowPath = path.join(__dirname, './src/comfy/__workflows__/image-to-video-workflow.json')
 		const workflow = await comfyClient.readLocalWorkflow(workflowPath)
 		const updatedWorkflow = await comfyClient.setWorkflowPropsImageToVideo(workflow, 'wave and say hello and kiss', 'example.jpg', 10)
 

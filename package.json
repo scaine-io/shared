@@ -1,6 +1,6 @@
 {
 	"name": "@scaine-io/shared",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "utils for Scaine",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
 		"update": "ncu -u @scaine-io/* && npm install",
 		"depcheck": "npx depcheck",
 		"unused": "ts-prune",
-		"test-image": "--exec \"ts-node test-image-to-video.ts\"",
+		"test-image": "ts-node test-image-to-video.ts",
 		"test-sync": "ts-node test-lip-sync.ts",
 		"test-download": "nodemon --ext ts --watch . --exec \"ts-node test-download.ts\"",
 		"test-storage": "nodemon --ext ts --watch . --exec \"ts-node test-storage.ts\""
