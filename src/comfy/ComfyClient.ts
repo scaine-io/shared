@@ -15,8 +15,11 @@ export class ComfyClient {
 	}
 
 	async uploadImageToComfyUI(buffer: Buffer, fileName: string) {
+		console.log(`upload image and get form data`)
+
 		const formData = new FormData()
-		const imageBlob = new Blob([new Uint8Array(buffer)], { type: 'image/jpeg' })
+		console.log(`fileName: ${fileName} and get Blob of it`)
+		const imageBlob = new Blob([new Uint8Array(buffer)], { type: getContentTypeByExtension(fileName) })
 
 		formData.append('image', imageBlob, fileName) // 'image' is the expected field name for the image file
 		formData.append('type', 'input') // Specifies the target folder (e.g., 'input', 'temp', 'output')
@@ -30,7 +33,12 @@ export class ComfyClient {
 				body: formData,
 			})
 
-			if (!response.ok) throw new Error(`HTTP error! status: ${response.statusText}`)
+			if (!response.ok) {
+				const errorText = await response.text()
+				console.error(`Headers: ${JSON.stringify(response.headers)}`)
+				console.error(`Body: ${errorText}`)
+				throw new Error(`HTTP error! status: ${response.statusText}`)
+			}
 
 			const result = await response.json()
 			return result as ComfyUploadResponse
@@ -57,6 +65,8 @@ export class ComfyClient {
 		workflow['30'].inputs.frame_rate = 30
 		workflow['50'].inputs.width = 1024
 		workflow['50'].inputs.height = 512
+
+		if (duration < 1) duration = 81
 		workflow['50'].inputs.length = duration
 		workflow['52'].inputs.image = imageInput
 
@@ -73,6 +83,7 @@ export class ComfyClient {
 	}
 
 	async sendComfyUIWorkflow(workflow: any) {
+		console.log(`Sending workflow to ComfyUI at ${this.comfyUrl}`)
 		const comfyUIApiUrl = this.comfyUrl.concat('/prompt')
 		try {
 			const response = await fetch(comfyUIApiUrl, {
@@ -85,7 +96,12 @@ export class ComfyClient {
 				}),
 			})
 
-			if (!response.ok) throw new Error(`HTTP error! status: ${response.statusText}`)
+			if (!response.ok) {
+				const errorText = await response.text()
+				console.error(`Headers: ${JSON.stringify(response.headers)}`)
+				console.error(`Body: ${errorText}`)
+				throw new Error(`HTTP error! status: ${response.statusText}`)
+			}
 
 			return (await response.json()) as WorkflowResponse
 		} catch (error: any) {
@@ -183,5 +199,48 @@ export class ComfyClient {
 		} catch (error: any) {
 			throw new Error(`Failed to download file for prompt ${id}: ${error.message}`)
 		}
+	}
+}
+
+/**
+ * Get content type (MIME) based on file extension for image, audio, and video files.
+ */
+export function getContentTypeByExtension(filename: string): string {
+	const ext = filename.split('.').pop()?.toLowerCase()
+	switch (ext) {
+		// Images
+		case 'jpg':
+		case 'jpeg':
+			return 'image/jpeg'
+		case 'png':
+			return 'image/png'
+		case 'gif':
+			return 'image/gif'
+		case 'webp':
+			return 'image/webp'
+		case 'svg':
+			return 'image/svg+xml'
+		// Audio
+		case 'mp3':
+			return 'audio/mpeg'
+		case 'wav':
+			return 'audio/wav'
+		case 'ogg':
+			return 'audio/ogg'
+		case 'm4a':
+			return 'audio/mp4'
+		// Video
+		case 'mp4':
+			return 'video/mp4'
+		case 'mov':
+			return 'video/quicktime'
+		case 'webm':
+			return 'video/webm'
+		case 'avi':
+			return 'video/x-msvideo'
+		case 'mkv':
+			return 'video/x-matroska'
+		default:
+			return 'application/octet-stream'
 	}
 }
